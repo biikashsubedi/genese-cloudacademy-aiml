@@ -1,0 +1,78 @@
+'use strict';
+const axios  require("axios');
+
+module.exports.getWeather = async(event) =>(
+const city = event.currentIntent.slots["City"];
+const url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=be97ab389e6883a0097c72b91dab5ffc";
+
+try{
+  const response =await axios.get(url);
+  const data = response.data;
+
+  const answer = "The temperature is " + data.main.temp + "C and Humidity is " + data.main.humidity + "% and "+ data.weather[0].description + " is expected.";
+
+  return{
+    "sessionAttributes":{},
+    "dialogAction":{
+      "type":"Close",
+      "fullfillmentState":"Fulfilled",
+      "message":{
+        "contentType":"Plaintext",
+        "content":answer
+      }
+    }
+  }
+}
+catch(error){
+  console.log(error);
+}
+);
+
+
+
+
+
+
+
+
+
+
+
+# nodejs banglure
+var http = require('http');
+exports.handler = (event, context, callback) => {
+  const city = event.currentIntent.slots["City"];
+  const url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=be97ab389e6883a0097c72b91dab5ffc&units=metric'
+  var res = http.get(url, function(res){
+    var body = '';
+    
+    res.on('data', function(chunk){
+      body += chunk;  
+    });
+    res.on('end', function(){
+      var responce = JSON.parse(body);
+      console.log("Got a Weather responce: "+responce);
+      var weather="Current weather in "+responce['name']+" The temperature is "+Math.floor(responce.main['temp'])+" °C. "+responce.weather[0]["description"]+", with humidity "+responce.main["humidity"]+"%, preasure ";
+      weather += responce.main['pressure']+" Hectopascal"
+      var final ={
+              
+          "dialogAction": {
+            
+            "type":"Close",
+            
+            "fulfillmentState":"Fulfilled",
+                
+            "message": {
+                    
+              "contentType":"PlainText",
+                    
+              "content" : weather               
+            }
+            
+      
+          }
+        }
+      callback(null,final);
+    });
+    });
+};

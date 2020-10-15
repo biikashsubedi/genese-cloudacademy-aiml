@@ -1,0 +1,11 @@
+Server 1:
+	DNS: ec2-100-25-152-106.compute-1.amazonaws.com
+	IP:  100.25.152.106
+	
+Server 2:
+	DNS: ec2-35-175-132-209.compute-1.amazonaws.com
+	IP:  35.175.132.209
+
+
+Load balancer:  
+	DNS: lab1-1579221573.us-east-1.elb.amazonaws.com
