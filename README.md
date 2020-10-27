@@ -1,4 +1,4 @@
-## genese-cloudacademy-aiml
+# genese-cloudacademy-aiml
 All Resource, Assignment, files, Lab
 
 # Course
